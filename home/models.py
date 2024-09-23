@@ -5,20 +5,10 @@ class Event(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     photo = models.ImageField(upload_to='events/')
     text = models.TextField()
+    date_start = models.DateField()
+    date_end = models.DateField()
 
     is_visible = models.BooleanField(default=True)
-    sort = models.IntegerField(default=0)
-
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-
-class EventList(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    slug = models.SlugField(max_length=50, unique=True)
-    events = models.ForeignKey(Event, on_delete=models.CASCADE)
     sort = models.IntegerField(default=0)
 
     created = models.DateTimeField(auto_now_add=True)

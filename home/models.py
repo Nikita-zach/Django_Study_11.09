@@ -1,5 +1,5 @@
 from django.db import models
-
+from ckeditor.fields import RichTextField
 
 class Category(models.Model):
     slug = models.SlugField(max_length=50, unique=True)
@@ -10,6 +10,11 @@ class Category(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __iter__(self):
+        dishes = self.dishes.filter(is_visible=True).order_by('sort')
+        for dish in dishes:
+            yield dish
 
     def __str__(self):
         return self.name
@@ -30,7 +35,7 @@ class Dish(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='dishes')
 
     def __str__(self):
         return self.name
@@ -86,13 +91,13 @@ class Gallery(models.Model):
     def __str__(self):
         return self.photo.name
 
-class ContactInfo(models.Model):
-    name = models.CharField(max_length=50, unique=True)
-    info = models.TextField()
-    icon = models.ImageField(upload_to='contacts/')
+class Contact(models.Model):
+    title= models.CharField(max_length=50)
+    description = RichTextField()
+    icon = models.CharField(max_length=50)
 
-    sort = models.IntegerField(default=0)
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self):
-        return self.name
+        return self.title

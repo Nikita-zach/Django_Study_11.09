@@ -94,8 +94,10 @@ class Gallery(models.Model):
 class Contact(models.Model):
     title= models.CharField(max_length=50)
     description = RichTextField()
-    icon = models.CharField(max_length=50)
+    icon = models.ImageField(upload_to='contacts/', null=True, blank=True)
 
+    sort = models.IntegerField(default=0)
+    is_visible = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Category, Dish, Gallery, Event, Stuff
+from .models import Category, Dish, Gallery, Event, Stuff, Contact
 
+admin.site.register(Contact)
 admin.site.register(Stuff)
 admin.site.register(Event)
 admin.site.register(Dish)

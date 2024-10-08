@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ckeditor',
-    'home.apps.HomeConfig'
+    'home.apps.HomeConfig',
+    'account.apps.AccountConfig',
 ]
 
 CKEDITOR_CONFIGS = {
@@ -66,12 +67,13 @@ TEMPLATES = [
         ,
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': [
+                'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-            ],
+                'home.context_processor.footer_items',
+            ]
         },
     },
 ]

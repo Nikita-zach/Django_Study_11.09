@@ -1347,17 +1347,23 @@ section {
 }
 
 .contact .info-item .icon {
-  display: flex;
+  display: inline-block;
   align-items: center;
   justify-content: center;
   width: 56px;
   height: 56px;
   font-size: 24px;
   line-height: 0;
-  color: #fff;
-  background: var(--color-primary);
+  background-size: contain;
+  background: none no-repeat;
   border-radius: 50%;
   margin-right: 15px;
+
+.contact .info-item .icon i {
+  width: 100%;
+  height: auto;
+  transform: scale(0.8);
+  object-fit: contain;
 }
 
 .contact .info-item h3 {

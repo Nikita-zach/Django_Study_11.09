@@ -1,3 +1,4 @@
+from django.core.validators import RegexValidator
 from django.db import models
 from ckeditor.fields import RichTextField
 
@@ -103,3 +104,35 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.title
+
+class Reservation(models.Model):
+    number_regex = RegexValidator(
+        regex=r'^\+?3?8?\d{9,15}$',
+        message="Phone number must be entered in the format: '+3899999999' or '999999999'. Up to 15 digits allowed."
+    )
+
+    name = models.CharField(max_length=50)
+    phone = models.CharField(max_length=50, validators=[number_regex])
+    email = models.EmailField()
+    date = models.DateField()
+    time = models.TimeField()
+    people = models.IntegerField()
+    message = models.TextField()
+
+    is_processed = models.BooleanField(default=False,)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+class FooterItems(models.Model):
+    item_title = models.CharField(max_length=50)
+    item_description = RichTextField()
+    item_icon = models.CharField(max_length=100, null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.item_title

@@ -1,28 +1,20 @@
-"""
-URL configuration for DjangoStudy project.
+from atexit import register
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-
 from DjangoStudy import settings
-from home.views import home_index
+from account.views import RegisterView, LoginUserView
+from home.views import home_index, thanks
+from account.views import logout
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_index),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('login/', LoginUserView.as_view(), name='login'),
+    path('logout', logout, name='logout'),
+    path('', home_index, name='home_index'),
+    path('thanks/', thanks, name='thanks'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

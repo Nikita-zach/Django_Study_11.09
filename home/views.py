@@ -10,11 +10,9 @@ def home_index(request):
     if request.method == 'POST':
         book_table_form = ReservationForm(request.POST)
         if book_table_form.is_valid():
-            print("form is valid")
             book_table_form.save()
             return redirect(request, 'thanks.html')
-        else:
-            print(book_table_form.errors)
+
 
     gallery = Gallery.objects.filter(is_visible=True)
     categories = Category.objects.filter(is_visible=True).order_by('sort')

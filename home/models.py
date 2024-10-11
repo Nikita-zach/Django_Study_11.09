@@ -128,7 +128,7 @@ class Reservation(models.Model):
 
 class FooterItems(models.Model):
     item_title = models.CharField(max_length=50)
-    item_description = RichTextField()
+    item_description = models.TextField()
     item_icon = models.CharField(max_length=100, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)

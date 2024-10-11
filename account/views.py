@@ -14,11 +14,14 @@ class RegisterView(CreateView):
         login(self.request, user)
         return redirect("home_index")
 
+
 class LoginUserView(LoginView):
     form_class = LoginForm
     template_name = "login.html"
+
     def get_success_url(self):
-        return redirect("home_index")
+        return self.request.GET.get('next') or "home_index"
+
 
 def logout(request):
     auth_logout(request)

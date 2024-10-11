@@ -13,7 +13,6 @@ def footer_items(request):
             context['reservations'] = item
         elif item.item_title == 'Opening Hours':
             context['opening_hours'] = item
-        print(context)
 
 
     return {

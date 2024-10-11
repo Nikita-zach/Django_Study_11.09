@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'home.apps.HomeConfig',
     'account.apps.AccountConfig',
+    'manager.apps.ManagerConfig',
 ]
 
 CKEDITOR_CONFIGS = {
